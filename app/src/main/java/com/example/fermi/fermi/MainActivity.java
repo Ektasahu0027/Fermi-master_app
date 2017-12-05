@@ -56,8 +56,6 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
-import java.util.Timer;
-import java.util.TimerTask;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
@@ -93,14 +91,15 @@ public class MainActivity extends AppCompatActivity {
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setTitle("Fermi");
-
-        new Timer().scheduleAtFixedRate(new TimerTask() {
+        getDataFromServer();
+      //  getDataFromServer();
+ /*       new Timer().scheduleAtFixedRate(new TimerTask() {
             @Override
             public void run() {
                 Log.d("getDataFromServer", "getDataFromServer");
                 getDataFromServer();
             }
-        }, 0, 2000);
+        }, 0, 2000);*/
 
         materialSearchView=(MaterialSearchView)findViewById(R.id.search_view);
 
@@ -249,7 +248,7 @@ public class MainActivity extends AppCompatActivity {
     }
     public void getDataFromServer() {
         //showProgressDialog();
-        databaseReference.child("users").addValueEventListener(new ValueEventListener() {
+        databaseReference.child("users").addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 users.clear();
