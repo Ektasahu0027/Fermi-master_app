@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:animateLayoutChanges="true"
+    tools:context="com.example.fermi.fermi.SettingActivity">
+
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/Toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:title="Fermi Assistant"
+        app:titleTextColor="#000000"
+        app:navigationIcon="?attr/homeAsUpIndicator" />
+
+    <TextView
+        android:id="@+id/emailSignup"
+        android:layout_width="match_parent"
+        android:gravity="center"
+        android:paddingTop="7dp"
+        android:paddingBottom="7dp"
+        android:layout_height="wrap_content"
+        android:text="Reset Password"
+        android:textColor="@color/colorPrimary"
+        android:textSize="18sp"
+        android:layout_marginTop="155dp"
+        android:background="@drawable/round_shape_textview"
+        android:layout_marginLeft="25dp"
+        android:layout_marginRight="25dp"
+        android:layout_below="@+id/AssistantToolbar"
+        android:layout_centerHorizontal="true" />
+
+
+    <TextView
+        android:id="@+id/fileds"
+        android:layout_width="match_parent"
+        android:gravity="center"
+        android:paddingTop="7dp"
+        android:paddingBottom="7dp"
+        android:layout_height="wrap_content"
+        android:text="Reset your subjects"
+        android:textColor="@color/colorPrimary"
+        android:textSize="18sp"
+        android:background="@drawable/round_shape_textview"
+        android:layout_marginLeft="25dp"
+        android:layout_marginRight="25dp"
+        android:layout_below="@+id/emailSignup"
+        android:layout_marginTop="64dp"
+        android:layout_alignParentStart="true" />
+
+
+</RelativeLayout>

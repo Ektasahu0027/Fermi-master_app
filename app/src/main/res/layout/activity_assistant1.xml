@@ -1,0 +1,201 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:animateLayoutChanges="true"
+    tools:context="com.example.fermi.fermi.AssistantActivity1">
+
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/AssistantToolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:title="Fermi Assistant"
+        app:titleTextColor="#000000"
+        app:navigationIcon="?attr/homeAsUpIndicator" />
+
+    <ListView
+        android:id="@+id/massage_list"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/AssistantToolbar"
+        android:layout_centerHorizontal="true"
+        android:stackFromBottom="true"
+        android:divider="@android:color/transparent"
+        android:dividerHeight="5.0sp"
+        android:transcriptMode="normal"
+        android:layout_above="@+id/list_itemscroll" />
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/cardView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_alignParentBottom="true"
+        android:layout_below="@+id/massage_list"
+        />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="80dp"
+        android:text="No user avalible now"
+        android:visibility="gone"
+        android:id="@+id/empty_message"
+        android:layout_below="@+id/massage_list"
+        android:gravity="center"
+        />
+
+    <!--<ListView
+        android:id="@+id/massage_list1"
+        android:layout_width="wrap_content"
+        android:layout_height="100dp"
+        android:stackFromBottom="true"
+        android:divider="@android:color/transparent"
+        android:dividerHeight="5.0sp"
+        android:transcriptMode="normal"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentStart="true" />-->
+
+    <View
+        android:layout_width="fill_parent"
+        android:layout_height="2dp"
+        android:background="#c0c0c0"
+        android:layout_below="@+id/massage_list"/>
+
+    <HorizontalScrollView
+        android:layout_width="fill_parent"
+        android:layout_height="70dp"
+        android:id="@+id/list_itemscroll"
+        android:layout_alignParentBottom="true">
+
+
+    <LinearLayout
+        android:id="@+id/mLlayoutBottomButtons"
+        android:layout_width="wrap_content"
+        android:visibility="invisible"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal" >
+
+        <Button
+            android:layout_width="80dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:layout_marginBottom="5dp"
+            android:layout_marginRight="5dp"
+            android:onClick="subjectChosenphysics"
+            android:tag="physics"
+            android:textColor="#3bcea7"
+            android:layout_marginLeft="100dp"
+            android:textAllCaps="false"
+            android:background="@drawable/round_shape_btn"
+            android:text="Physics" />
+
+        <Button
+            android:layout_width="80dp"
+            android:layout_height="wrap_content"
+            android:onClick="subjectChosenmeths"
+            android:tag="maths"
+            android:textColor="#3bcea7"
+            android:layout_margin="5dp"
+            android:background="@drawable/round_shape_btn"
+            android:textAllCaps="false"
+            android:text="Maths"/>
+
+        <Button
+            android:layout_width="80dp"
+            android:layout_height="wrap_content"
+            android:onClick="subjectChosenbiology"
+            android:tag="biology"
+            android:textColor="#3bcea7"
+            android:layout_margin="5dp"
+            android:background="@drawable/round_shape_btn"
+            android:textAllCaps="false"
+            android:text="Biology"/>
+
+        <Button
+            android:layout_width="80dp"
+            android:layout_height="wrap_content"
+            android:onClick="subjectChosenchemistry"
+            android:textColor="#3bcea7"
+            android:layout_margin="5dp"
+            android:text="Chemistry"
+            android:background="@drawable/round_shape_btn"
+            android:textAllCaps="false"/>
+
+
+        <Button
+            android:layout_width="80dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            android:onClick="subjectChosenHealth"
+            android:tag="Health"
+            android:textColor="#3bcea7"
+            android:textAllCaps="false"
+            android:background="@drawable/round_shape_btn"
+            android:text="Health" />
+
+        <Button
+            android:layout_width="80dp"
+            android:layout_height="wrap_content"
+            android:onClick="subjectChosenArt"
+            android:tag="Art"
+            android:textColor="#3bcea7"
+            android:layout_margin="5dp"
+            android:background="@drawable/round_shape_btn"
+            android:textAllCaps="false"
+            android:text="Art"/>
+
+        <Button
+            android:layout_width="80dp"
+            android:layout_height="wrap_content"
+            android:onClick="subjectChosenFitness"
+            android:tag="Fitness"
+            android:textColor="#3bcea7"
+            android:layout_margin="5dp"
+            android:background="@drawable/round_shape_btn"
+            android:textAllCaps="false"
+            android:text="Fitness"/>
+
+    </LinearLayout>
+
+    </HorizontalScrollView>
+
+  <!--  <LinearLayout
+        android:id="@+id/mLlayoutBottomyesnobtn"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+         android:visibility="invisible"
+        android:layout_alignParentBottom="true"
+        android:orientation="horizontal" >
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:layout_margin="5dp"
+            android:onClick="yesmethode"
+            android:tag="physics"
+            android:textColor="#3bcea7"
+            android:textAllCaps="false"
+            android:background="@drawable/round_shape_btn"
+            android:text="Yes" />
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:onClick="nomethode"
+            android:tag="maths"
+            android:textColor="#3bcea7"
+            android:layout_margin="5dp"
+            android:background="@drawable/round_shape_btn"
+            android:textAllCaps="false"
+            android:text="No"/>
+
+
+
+    </LinearLayout>
+-->
+
+
+</RelativeLayout>

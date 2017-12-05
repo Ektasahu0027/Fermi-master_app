@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:id="@+id/layout_chat"
+    android:orientation="vertical" >
+
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:animateLayoutChanges="true"
+        android:orientation="vertical"
+        tools:context="com.example.fermi.fermi.AssistantActivity1">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:id="@+id/sender">
+
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/profile_view"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_margin="5dp"
+                android:background="@drawable/profile"
+                />
+
+            <TextView
+                android:id="@+id/messageTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="@dimen/text_size_normal"
+                android:paddingBottom="@dimen/text_large_padding"
+                android:paddingTop="@dimen/text_large_padding"
+                android:paddingLeft="@dimen/text_large_padding"
+                android:layout_marginRight="20dp"
+                android:paddingRight="@dimen/text_large_padding"
+                />
+
+            <TextView
+                android:id="@+id/txt_msg_time"
+                android:visibility="gone"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="@dimen/text_size_small"
+                android:paddingBottom="@dimen/text_large_padding"
+                android:paddingLeft="@dimen/text_large_padding"
+                android:paddingRight="@dimen/text_large_padding"
+                />
+
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:id="@+id/receiver">
+
+            <TextView
+                android:id="@+id/messageTextView1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:textSize="@dimen/text_size_normal"
+                android:paddingTop="@dimen/text_large_padding"
+                android:paddingBottom="@dimen/text_large_padding"
+                android:paddingLeft="@dimen/text_large_padding"
+                android:paddingRight="@dimen/text_large_padding"
+                />
+          <!--  <ImageView
+                android:layout_width="15dp"
+                android:layout_height="15dp"
+                android:src="@drawable/send_confirm"
+                android:layout_margin="5dp"
+                />-->
+
+             </LinearLayout>
+
+    </LinearLayout>
+
+</LinearLayout>

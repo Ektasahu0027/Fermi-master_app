@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorPrimary"
+    android:gravity="center_horizontal"
+    android:paddingTop="15dp"
+    tools:context="com.example.fermi.fermi.SignupActivity">
+
+<!--   <com.facebook.login.widget.LoginButton
+       android:id="@+id/login_button"
+       android:layout_width="wrap_content"
+       android:layout_height="wrap_content"
+       android:layout_gravity="center_horizontal"
+       android:layout_marginBottom="22dp"
+       android:layout_above="@+id/fbSignup"
+       android:layout_alignEnd="@+id/fbSignup" />-->
+   <Button
+    android:id="@+id/fbSignup"
+    android:layout_width="wrap_content"
+    android:layout_height="40dp"
+    android:layout_gravity="center_horizontal"
+    android:layout_marginTop="11dp"
+    android:background="@drawable/loginfacebook"
+    android:layout_centerInParent="true"
+    android:layout_centerHorizontal="true" />
+
+   <!-- <com.facebook.login.widget.LoginButton
+        android:id="@+id/fbSignup"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="11dp"
+        android:layout_centerInParent="true"
+        android:layout_centerHorizontal="true" />-->
+
+    <ImageView
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="55dp"
+        android:layout_above="@id/fbSignup"
+        android:src="@drawable/fermi"
+        android:id="@+id/imageView" />
+
+
+    <TextView
+        android:id="@+id/orBarSignup"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/fbSignup"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="25dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:text="OR"
+        android:textColor="@color/colorPrimaryDark"/>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginTop="32dp"
+        android:layout_marginLeft="16dp"
+        android:layout_toLeftOf="@id/orBarSignup"
+        android:layout_below="@id/fbSignup"
+        android:background="@color/colorPrimaryDark"
+        />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginTop="32dp"
+        android:layout_marginLeft="16dp"
+        android:layout_toRightOf="@id/orBarSignup"
+        android:layout_below="@id/fbSignup"
+        android:background="@color/colorPrimaryDark"
+        />
+
+    <TextView
+        android:id="@+id/emailSignup"
+        android:background="@drawable/round_shape_textview"
+        android:layout_width="match_parent"
+        android:gravity="center"
+        android:layout_margin="18dp"
+        android:paddingTop="7dp"
+        android:paddingBottom="7dp"
+        android:layout_height="wrap_content"
+        android:text="Sign up with email"
+        android:textColor="@color/colorPrimary"
+        android:textSize="18sp"
+        android:layout_marginTop="25dp"
+        android:layout_below="@+id/orBarSignup"
+        android:layout_centerHorizontal="true" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_centerVertical="true"
+        android:layout_marginRight="16dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginBottom="45dp"
+        android:layout_alignParentBottom="true"
+        android:background="#9E9E9E"
+        />
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+
+        >
+
+    <TextView
+    android:id="@+id/loginText1"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:text="Already have an account?"
+    android:textColor="#9E9E9E"
+    android:textSize="12sp"
+    android:layout_marginBottom="15dp" />
+
+    <TextView
+        android:id="@+id/loginText2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Log in"
+        android:layout_marginRight="3dp"
+        android:textColor="#434343"
+        android:textSize="12sp"
+        android:layout_marginBottom="15dp" />
+
+    </LinearLayout>
+
+</RelativeLayout>

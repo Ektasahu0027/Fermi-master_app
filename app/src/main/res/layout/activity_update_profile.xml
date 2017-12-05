@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fitsSystemWindows="true"
+    tools:context=".GetProfileActivity">
+
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/addPhoto"
+        android:layout_width="200dp"
+        android:layout_height="200dp"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="26dp"
+        android:background="@drawable/circle_imageview"
+        android:src="@drawable/user" />
+
+    <ImageButton
+        android:id="@+id/addPhoto1"
+        android:layout_width="45dp"
+        android:layout_height="45dp"
+        android:background="@drawable/addcamera"
+        android:layout_alignBottom="@+id/addPhoto"
+        android:layout_toEndOf="@+id/addPhoto" />
+
+    <TextView
+        android:id="@+id/addPhotoText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/addPhoto"
+        android:layout_centerHorizontal="true"
+        android:text="Add a Profile Photo"
+        android:textColor="#000000"
+        android:textSize="18sp" />
+
+    <ProgressBar
+        android:id="@+id/progress_bar_get_profile"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/addPhotoText"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="12dp"
+        android:visibility="invisible" />
+    
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="270dp"
+        android:paddingLeft="12dp"
+        android:paddingRight="12dp"
+        android:layout_marginTop="11dp"
+        android:layout_alignParentBottom="true">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="2dp"
+            android:text=""
+            android:textAllCaps="true"
+            android:textColor="#000000"
+            android:textSize="17sp" />
+
+        <EditText
+            android:id="@+id/get_name_input"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Enter name"
+            android:imeOptions="actionDone"
+            android:maxLines="1"
+            android:textSize="22sp"
+           />
+
+        <TextView
+            android:id="@+id/button_next"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="10dp"
+            android:text=">"
+            android:textColor="@color/colorPrimaryDark"
+            android:textSize="48sp"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentEnd="true" />
+
+        <EditText
+            android:id="@+id/get_qualification"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Enter your qualification"
+            android:imeOptions="actionDone"
+            android:maxLines="1"
+            android:textSize="22sp"
+            android:layout_below="@+id/get_name_input"
+            android:layout_marginTop="22dp"
+            />
+
+    </RelativeLayout>
+
+</RelativeLayout>

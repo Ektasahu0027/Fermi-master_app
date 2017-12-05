@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="Fermi" parent="android:Theme.Material.Light.DarkActionBar" >
+        <item name="android:colorAccent">@color/accent_material_light_1</item>
+    </style>
+</resources>

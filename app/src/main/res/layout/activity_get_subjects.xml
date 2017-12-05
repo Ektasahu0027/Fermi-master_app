@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.example.fermi.fermi.GetSubjectsActivity">
+
+    <ProgressBar
+        android:id="@+id/progress_bar_get_subjects"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:visibility="visible" />
+
+    <RelativeLayout
+        android:id="@+id/rootGetSubjects"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:animateLayoutChanges="true"
+        android:visibility="invisible">
+
+        <ImageView
+        android:id="@+id/fermiLogo"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="30dp"
+        android:src="@drawable/fermi" />
+
+        <TextView
+            android:id="@+id/askHelpText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/fermiLogo"
+            android:layout_marginLeft="12dp"
+            android:layout_marginTop="35dp"
+            android:text="@string/ask_help" />
+
+        <RadioGroup
+            android:id="@+id/yesNoGroup"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/askHelpText"
+            android:layout_marginLeft="12dp"
+            android:layout_marginTop="8dp">
+
+            <RadioButton
+                android:id="@+id/yesRadioButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Yes" />
+
+            <RadioButton
+                android:id="@+id/noRadioButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="No" />
+        </RadioGroup>
+
+        <TextView
+            android:id="@+id/askSubjectsText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/yesNoGroup"
+            android:layout_marginLeft="12dp"
+            android:layout_marginTop="45dp"
+            android:text="Which subjects would you like to help with ?"
+            android:visibility="invisible" />
+
+        <GridLayout
+            android:id="@+id/subjectsGroup"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/askSubjectsText"
+            android:layout_marginLeft="12dp"
+            android:layout_marginTop="8dp"
+            android:orientation="vertical"
+            android:rowCount="2"
+            android:visibility="invisible">
+
+            <CheckBox
+                android:id="@+id/mathsCheckbox"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Maths" />
+
+            <CheckBox
+                android:id="@+id/physicsCheckbox"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Physics" />
+
+            <CheckBox
+                android:id="@+id/chemistryCheckbox"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Chemistry" />
+
+            <CheckBox
+                android:id="@+id/biologyCheckbox"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Biology" />
+
+            <CheckBox
+                android:id="@+id/healthCheckbox"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Health" />
+
+            <CheckBox
+                android:id="@+id/fitnessCheckbox"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Fitness" />
+
+            <CheckBox
+                android:id="@+id/artCheckbox"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Art" />
+        </GridLayout>
+
+
+        <Button
+            android:id="@+id/BtnSubjectsNext"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginBottom="24dp"
+        android:layout_marginLeft="26dp"
+        android:layout_marginRight="26dp"
+        android:layout_marginTop="36dp"
+        android:background="@drawable/round_shape_btn"
+        android:text="Next"
+        android:textAllCaps="false"
+        android:textColor="@color/colorPrimaryDark" />
+
+    </RelativeLayout>
+
+
+</RelativeLayout>

@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "237015930587",
+    "firebase_url": "https://fermi-c9096.firebaseio.com",
+    "project_id": "fermi-c9096",
+    "storage_bucket": "fermi-c9096.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:237015930587:android:8e9d5be5b38e1f76",
+        "android_client_info": {
+          "package_name": "com.example.fermi.fermi"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "237015930587-8k30e9m4rja4ckf3rs4r1k56ii11ij8q.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDSm3vU3FKXFLS9sIsdUl2wXu7ba6eIxQw"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
