@@ -216,7 +216,7 @@ public class ContactTabFragment extends Fragment {
     public void getDataFromServer() {
 
         try {
-            databaseReference.child("users").child( FirebaseAuth.getInstance().getCurrentUser().getUid()).child("Person").addValueEventListener(new ValueEventListener() {
+            databaseReference.child("users").child( FirebaseAuth.getInstance().getCurrentUser().getUid()).child("Person").addListenerForSingleValueEvent(new ValueEventListener() {
                 @Override
                 public void onDataChange(DataSnapshot dataSnapshot) {
                     users.clear();
