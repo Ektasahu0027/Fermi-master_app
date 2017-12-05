@@ -202,7 +202,7 @@ public class ChatTabFragment extends Fragment {
     public void getDataFromServer() {
 
         try {
-            databaseReference.child("users").child( FirebaseAuth.getInstance().getCurrentUser().getUid()).child("Conversation_person").addValueEventListener(new ValueEventListener() {
+            databaseReference.child("users").child( FirebaseAuth.getInstance().getCurrentUser().getUid()).child("Conversation_person").addListenerForSingleValueEvent(new ValueEventListener() {
                 @Override
                 public void onDataChange(DataSnapshot dataSnapshot) {
                     users.clear();
