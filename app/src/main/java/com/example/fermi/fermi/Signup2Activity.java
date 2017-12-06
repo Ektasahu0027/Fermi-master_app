@@ -141,19 +141,19 @@ public class Signup2Activity extends AppCompatActivity {
                                         user.setName(FullName.getText().toString());
                                         user.setEmail(email);
                                         user.setUdid(firebaseAuth.getCurrentUser().getUid());
-                                        user.setProfile(downloadUrl);
+                                       // user.setProfile(downloadUrl);
 
                                         UserProfileChangeRequest profileUpdates;
 
-                                        if (downloadUrl != null && !downloadUrl.isEmpty()) {
+                                        if(downloadUrl==null) {
+                                            user.setProfile(downloadUrl);
+                                            profileUpdates = new UserProfileChangeRequest.Builder()
+                                                    .setDisplayName(user.getName().trim())
+                                                    .build();
+                                        }else{
                                             profileUpdates = new UserProfileChangeRequest.Builder()
                                                     .setDisplayName(user.getName().trim())
                                                     .setPhotoUri(Uri.parse(downloadUrl))
-                                                    .build();
-                                        }
-                                        else {
-                                            profileUpdates = new UserProfileChangeRequest.Builder()
-                                                    .setDisplayName(user.getName().trim())
                                                     .build();
                                         }
 
