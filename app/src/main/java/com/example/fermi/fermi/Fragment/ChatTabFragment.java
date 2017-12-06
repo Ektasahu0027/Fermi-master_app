@@ -118,7 +118,7 @@ public class ChatTabFragment extends Fragment {
 
         myTimer = new Timer();
         int delay = 0;   // delay for 30 sec.
-        int period = 5000;  // repeat every 60 sec.
+        int period = 1000;  // repeat every 60 sec.
         doThis = new TimerTask() {
             public void run() {
                 getDataFromServer();
@@ -150,7 +150,7 @@ public class ChatTabFragment extends Fragment {
                 myIntent.putExtra("image", profile_pic);
                 myIntent.putExtra("Email", email_id);
                 startActivity(myIntent);
-                myTimer.cancel();
+              //  myTimer.cancel();
                // getActivity().finish();
 
 
