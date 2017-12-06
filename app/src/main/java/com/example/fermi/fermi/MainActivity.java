@@ -60,10 +60,10 @@ import de.hdodenhof.circleimageview.CircleImageView;
 
 public class MainActivity extends AppCompatActivity {
 
-    private static final String TAG ="ekta" ;
+    private static final String TAG = "ekta";
     CircleImageView photo;
     ListView allusers;
-    static public RelativeLayout inviteview,nouser,usernotavalible;
+    static public RelativeLayout inviteview, nouser, usernotavalible;
     private Toolbar toolbar;
     private TabLayout tabLayout;
     private ViewPager viewPager;
@@ -90,15 +90,15 @@ public class MainActivity extends AppCompatActivity {
         mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
         inviteview = (RelativeLayout) findViewById(R.id.contact_search);
         nouser = (RelativeLayout) findViewById(R.id.no_search_user);
-        progressBar=(ProgressBar)findViewById(R.id.progress_bar);
+        progressBar = (ProgressBar) findViewById(R.id.progress_bar);
         usernotavalible = (RelativeLayout) findViewById(R.id.user_not_avalible);
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setTitle("Fermi");
 
-       // getDataFromServer();
+        // getDataFromServer();
 
-        materialSearchView=(MaterialSearchView)findViewById(R.id.search_view);
+        materialSearchView = (MaterialSearchView) findViewById(R.id.search_view);
 
 
         allusers.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -108,12 +108,12 @@ public class MainActivity extends AppCompatActivity {
                 // selected item
                 String selected = ((TextView) view.findViewById(R.id.name)).getText().toString();
                 String uid = ((TextView) view.findViewById(R.id.uid_name)).getText().toString();
-                String profile_pic=((TextView) view.findViewById(R.id.profile_url)).getText().toString();
-                String email_id=((TextView) view.findViewById(R.id.number)).getText().toString();
+                String profile_pic = ((TextView) view.findViewById(R.id.profile_url)).getText().toString();
+                String email_id = ((TextView) view.findViewById(R.id.number)).getText().toString();
 
                 Intent myIntent = new Intent(getApplicationContext(), ChatActivitySearch.class);
-                myIntent.putExtra("Username", selected );
-                myIntent.putExtra("Uid", uid );
+                myIntent.putExtra("Username", selected);
+                myIntent.putExtra("Uid", uid);
                 myIntent.putExtra("image", profile_pic);
                 myIntent.putExtra("Email", email_id);
                 //myIntent.putExtra("Profile", (Parcelable) profile);
@@ -135,6 +135,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+
         materialSearchView.setOnQueryTextListener(new MaterialSearchView.OnQueryTextListener() {
 
             @Override
@@ -144,7 +145,7 @@ public class MainActivity extends AppCompatActivity {
                     @Override
                     public void onDataChange(DataSnapshot dataSnapshot) {
 
-                        if (dataSnapshot.getValue()==null){
+                        if (dataSnapshot.getValue() == null) {
                             databaseReference.child("users").orderByChild("email").equalTo(query).addListenerForSingleValueEvent(new ValueEventListener() {
                                 @Override
                                 public void onDataChange(DataSnapshot dataSnapshot) {
@@ -153,20 +154,21 @@ public class MainActivity extends AppCompatActivity {
                                     st.execute(dataSnapshot);
 
                                 }
+
                                 @Override
                                 public void onCancelled(DatabaseError databaseError) {
 
                                 }
                             });
 
-                        }
-                        else {
+                        } else {
                             SearchTask st = new SearchTask();
                             st.execute(dataSnapshot);
 
                         }
 
                     }
+
                     @Override
                     public void onCancelled(DatabaseError databaseError) {
                     }
@@ -262,7 +264,7 @@ public class MainActivity extends AppCompatActivity {
 
             FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
 
-            if(user != null && !user.getDisplayName().equals("") && user.getPhotoUrl() != null) {
+            if (user != null && !user.getDisplayName().equals("") && user.getPhotoUrl() != null) {
                 Log.i("MAINACTIVITY", "Setting name and photo");
                 TextView name = (TextView) findViewById(R.id.profileName);
                 name.setText(user.getDisplayName());
@@ -276,61 +278,62 @@ public class MainActivity extends AppCompatActivity {
             }
         }
     }
-   /* public void getDataFromServer() {
-        //showProgressDialog();
-        databaseReference.child("users").addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                users.clear();
-                if (dataSnapshot.exists()) {
-                    for (DataSnapshot postSnapShot : dataSnapshot.getChildren()) {
-                        User user = postSnapShot.getValue(User.class);
-                        try {
-                            if (!user.getName().equals(FirebaseAuth.getInstance().getCurrentUser().getDisplayName())){
-                                users.add(user);
-                                adapter.notifyDataSetChanged();
-                                Collections.sort(users, new Comparator<User>() {
-                                    @Override
-                                    public int compare(User u1, User u2) {
-                                        Log.d("compare",u1.getName()+""+u2.getName());
-                                        return u1.getName().compareToIgnoreCase(u2.getName());
-                                    }
-                                });
-                                Log.d("compare","123");
-                            }
-                            else {
-                            }
-                        }
-                        catch (Exception e){
-                        }
-                    }
-                }
-                // hideProgressDialog();
-            }
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-                // hideProgressDialog();
-            }
-        });
-    }
 
-    public boolean isStoragePermissionGranted() {
-        if (Build.VERSION.SDK_INT >= 23) {
-            if (checkSelfPermission(Manifest.permission.READ_CONTACTS)
-                    == PackageManager.PERMISSION_GRANTED) {
-                Log.v(TAG, "Permission is granted");
-                return true;
-            } else {
-                Log.v(TAG, "Permission is revoked");
-                ActivityCompat.requestPermissions(this, new String[]{android.Manifest.permission.READ_CONTACTS, android.Manifest.permission.INTERNET}, 1);
-                return false;
-            }
-        } else { //permission is automatically granted on sdk<23 upon installation
-            Log.v(TAG, "Permission is granted");
-            return true;
-        }
-    }
-*/
+    /* public void getDataFromServer() {
+         //showProgressDialog();
+         databaseReference.child("users").addListenerForSingleValueEvent(new ValueEventListener() {
+             @Override
+             public void onDataChange(DataSnapshot dataSnapshot) {
+                 users.clear();
+                 if (dataSnapshot.exists()) {
+                     for (DataSnapshot postSnapShot : dataSnapshot.getChildren()) {
+                         User user = postSnapShot.getValue(User.class);
+                         try {
+                             if (!user.getName().equals(FirebaseAuth.getInstance().getCurrentUser().getDisplayName())){
+                                 users.add(user);
+                                 adapter.notifyDataSetChanged();
+                                 Collections.sort(users, new Comparator<User>() {
+                                     @Override
+                                     public int compare(User u1, User u2) {
+                                         Log.d("compare",u1.getName()+""+u2.getName());
+                                         return u1.getName().compareToIgnoreCase(u2.getName());
+                                     }
+                                 });
+                                 Log.d("compare","123");
+                             }
+                             else {
+                             }
+                         }
+                         catch (Exception e){
+                         }
+                     }
+                 }
+                 // hideProgressDialog();
+             }
+             @Override
+             public void onCancelled(DatabaseError databaseError) {
+                 // hideProgressDialog();
+             }
+         });
+     }
+
+     public boolean isStoragePermissionGranted() {
+         if (Build.VERSION.SDK_INT >= 23) {
+             if (checkSelfPermission(Manifest.permission.READ_CONTACTS)
+                     == PackageManager.PERMISSION_GRANTED) {
+                 Log.v(TAG, "Permission is granted");
+                 return true;
+             } else {
+                 Log.v(TAG, "Permission is revoked");
+                 ActivityCompat.requestPermissions(this, new String[]{android.Manifest.permission.READ_CONTACTS, android.Manifest.permission.INTERNET}, 1);
+                 return false;
+             }
+         } else { //permission is automatically granted on sdk<23 upon installation
+             Log.v(TAG, "Permission is granted");
+             return true;
+         }
+     }
+ */
     @Override
     public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
@@ -342,24 +345,23 @@ public class MainActivity extends AppCompatActivity {
             Log.d("Permission",permissions[i]+" result is:"+grantResults[i]);
         }*/
     }
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.menu_item,menu);
+        getMenuInflater().inflate(R.menu.menu_item, menu);
         MenuItem item = menu.findItem(R.id.search_btn);
         materialSearchView.setMenuItem(item);
         return true;
     }
 
     @Override
-    protected void onPostCreate(Bundle savedInstanceState)
-    {
+    protected void onPostCreate(Bundle savedInstanceState) {
         super.onPostCreate(savedInstanceState);
         mDrawerToggle.syncState();
     }
 
     @Override
-    public void onConfigurationChanged(Configuration newConfig)
-    {
+    public void onConfigurationChanged(Configuration newConfig) {
         super.onConfigurationChanged(newConfig);
         mDrawerToggle.onConfigurationChanged(newConfig);
     }
@@ -409,23 +411,26 @@ public class MainActivity extends AppCompatActivity {
 
         @Override
         protected void onPostExecute(Bitmap result) {
-            photo.setImageBitmap(result);        }
+            photo.setImageBitmap(result);
+        }
 
         private Bitmap download_Image(String url) {
 
-            Bitmap bmp =null;
-            try{
+            Bitmap bmp = null;
+            try {
                 URL ulrn = new URL(url);
-                HttpURLConnection con = (HttpURLConnection)ulrn.openConnection();
+                HttpURLConnection con = (HttpURLConnection) ulrn.openConnection();
                 InputStream is = con.getInputStream();
                 bmp = BitmapFactory.decodeStream(is);
                 if (null != bmp)
                     return bmp;
 
-            }catch(Exception e){}
+            } catch (Exception e) {
+            }
             return bmp;
         }
     }
+
     private class ListingAdapter extends BaseAdapter {
         Context context;
         LayoutInflater layoutInflater;
@@ -454,17 +459,17 @@ public class MainActivity extends AppCompatActivity {
 
                 holder.fullname = (TextView) convertView.findViewById(R.id.name);
                 holder.email = (TextView) convertView.findViewById(R.id.number);
-                holder.profile=(CircleImageView)convertView.findViewById(R.id.image_view_contact_display);
-                holder.uid_name=(TextView)convertView.findViewById(R.id.uid_name);
+                holder.profile = (CircleImageView) convertView.findViewById(R.id.image_view_contact_display);
+                holder.uid_name = (TextView) convertView.findViewById(R.id.uid_name);
                 holder.profileurl = (TextView) convertView.findViewById(R.id.profile_url);
-                holder.invite=(TextView)convertView.findViewById(R.id.invitaion);
+                holder.invite = (TextView) convertView.findViewById(R.id.invitaion);
 
                 convertView.setTag(holder);
             } else {
                 holder = (ViewHolder) convertView.getTag();
             }
 
-            try{
+            try {
                 User user = users.get(position);  //IndexOutOfBoundsException
 
                 // if (!user.getName().equals(FirebaseAuth.getInstance().getCurrentUser().getDisplayName())){
@@ -477,7 +482,7 @@ public class MainActivity extends AppCompatActivity {
                         .placeholder(R.drawable.profile)
                         .into(holder.profile);
 
-            }catch (Exception e){
+            } catch (Exception e) {
 
             }
 
@@ -485,24 +490,23 @@ public class MainActivity extends AppCompatActivity {
                 @Override
                 public void onDataChange(DataSnapshot dataSnapshot) {
 
-                    String  lastmessa = (String) dataSnapshot.child("status").getValue();
-                    Log.d("name",""+lastmessa);
+                    String lastmessa = (String) dataSnapshot.child("status").getValue();
+                    Log.d("name", "" + lastmessa);
 
-                    Log.d("last",""+lastmessa);
+                    Log.d("last", "" + lastmessa);
                     try {
-                        if (lastmessa == null){
+                        if (lastmessa == null) {
                             holder.invite.setText("Invite");
-                        }
-                        else if (lastmessa.equals("Friend")){
+                        } else if (lastmessa.equals("Friend")) {
                             holder.invite.setText("Friend");
-                        }
-                        else  if (lastmessa.equals("Invite")){
+                        } else if (lastmessa.equals("Invite")) {
                             holder.invite.setText("REQUESTED");
                         }
-                    }catch (Exception e){
-                        Log.d("last4",""+lastmessa);
+                    } catch (Exception e) {
+                        Log.d("last4", "" + lastmessa);
                     }
                 }
+
                 @Override
                 public void onCancelled(DatabaseError databaseError) {
 
@@ -512,7 +516,7 @@ public class MainActivity extends AppCompatActivity {
         }
 
         public class ViewHolder {
-            TextView fullname, email,uid_name,profileurl,invite;
+            TextView fullname, email, uid_name, profileurl, invite;
             CircleImageView profile;
         }
 
@@ -530,6 +534,7 @@ public class MainActivity extends AppCompatActivity {
 
     private class SearchTask extends AsyncTask<DataSnapshot, Integer, Void> {
         ArrayList<User> users1 = new ArrayList<User>();
+
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
@@ -562,9 +567,6 @@ public class MainActivity extends AppCompatActivity {
                 }
             }
             // hideProgressDialog();
-
-
-
 
             return null;
 
