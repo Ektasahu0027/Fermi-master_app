@@ -125,15 +125,13 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onSearchViewShown() {
                 inviteview.setVisibility(View.VISIBLE);
-                nouser.setVisibility(View.VISIBLE);
-                usernotavalible.setVisibility(View.GONE);
             }
 
             @Override
             public void onSearchViewClosed() {
                 inviteview.setVisibility(View.GONE);
-               /* adapter = new ListingAdapter(getApplicationContext(), users);
-                allusers.setAdapter(adapter);*/
+                //adapter = new ListingAdapter(getApplicationContext(), users);
+                allusers.setAdapter(null);
             }
         });
 
@@ -157,7 +155,7 @@ public class MainActivity extends AppCompatActivity {
                                 }
                                 @Override
                                 public void onCancelled(DatabaseError databaseError) {
-                                  
+
                                 }
                             });
 
@@ -167,7 +165,7 @@ public class MainActivity extends AppCompatActivity {
                             st.execute(dataSnapshot);
 
                         }
-                      
+
                     }
                     @Override
                     public void onCancelled(DatabaseError databaseError) {
@@ -197,7 +195,7 @@ public class MainActivity extends AppCompatActivity {
 
                 return true;
 
-           
+
             }
         });
 
@@ -541,7 +539,6 @@ public class MainActivity extends AppCompatActivity {
 
         @Override
         protected Void doInBackground(DataSnapshot... params) {
-
 
             if (params[0].exists()) {
                 for (DataSnapshot postSnapShot : params[0].getChildren()) {
