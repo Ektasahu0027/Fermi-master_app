@@ -1,6 +1,5 @@
 package com.example.fermi.fermi;
 
-import android.Manifest;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.Intent;
@@ -10,10 +9,8 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.AsyncTask;
-import android.os.Build;
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
-import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
@@ -34,6 +31,7 @@ import android.widget.AdapterView;
 import android.widget.BaseAdapter;
 import android.widget.LinearLayout;
 import android.widget.ListView;
+import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
@@ -71,6 +69,7 @@ public class MainActivity extends AppCompatActivity {
     private ViewPager viewPager;
     private DrawerLayout mDrawerLayout;
     AlertDialog alertDialog;
+    ProgressBar progressBar;
     private ActionBarDrawerToggle mDrawerToggle;
     static public MaterialSearchView materialSearchView;
     FirebaseUser user1 = FirebaseAuth.getInstance().getCurrentUser();
@@ -91,12 +90,13 @@ public class MainActivity extends AppCompatActivity {
         mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
         inviteview = (RelativeLayout) findViewById(R.id.contact_search);
         nouser = (RelativeLayout) findViewById(R.id.no_search_user);
+        progressBar=(ProgressBar)findViewById(R.id.progress_bar);
         usernotavalible = (RelativeLayout) findViewById(R.id.user_not_avalible);
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setTitle("Fermi");
 
-        getDataFromServer();
+       // getDataFromServer();
 
         materialSearchView=(MaterialSearchView)findViewById(R.id.search_view);
 
@@ -125,6 +125,8 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onSearchViewShown() {
                 inviteview.setVisibility(View.VISIBLE);
+                nouser.setVisibility(View.VISIBLE);
+                usernotavalible.setVisibility(View.GONE);
             }
 
             @Override
@@ -138,8 +140,48 @@ public class MainActivity extends AppCompatActivity {
         materialSearchView.setOnQueryTextListener(new MaterialSearchView.OnQueryTextListener() {
 
             @Override
-            public boolean onQueryTextSubmit(String query) {
+            public boolean onQueryTextSubmit(final String query) {
+
                 databaseReference.child("users").orderByChild("name").equalTo(query).addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(DataSnapshot dataSnapshot) {
+
+                        if (dataSnapshot.getValue()==null){
+                            databaseReference.child("users").orderByChild("email").equalTo(query).addListenerForSingleValueEvent(new ValueEventListener() {
+                                @Override
+                                public void onDataChange(DataSnapshot dataSnapshot) {
+
+                                    SearchTask st = new SearchTask();
+                                    st.execute(dataSnapshot);
+
+                                }
+                                @Override
+                                public void onCancelled(DatabaseError databaseError) {
+                                  
+                                }
+                            });
+
+                        }
+                        else {
+                            SearchTask st = new SearchTask();
+                            st.execute(dataSnapshot);
+
+                        }
+                      
+                    }
+                    @Override
+                    public void onCancelled(DatabaseError databaseError) {
+                    }
+
+                });
+                return true;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                progressBar.setVisibility(View.VISIBLE);
+              /*  progressBar.setVisibility(View.VISIBLE);
+                databaseReference.child("users").orderByChild("name").equalTo(newText).addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
                     public void onDataChange(DataSnapshot dataSnapshot) {
                         SearchTask st = new SearchTask();
@@ -149,16 +191,13 @@ public class MainActivity extends AppCompatActivity {
                     @Override
                     public void onCancelled(DatabaseError databaseError) {
                         // hideProgressDialog();
+                      //  progressBar.setVisibility(View.GONE);
                     }
-                });
+                });*/
 
                 return true;
-            }
 
-            @Override
-            public boolean onQueryTextChange(String newText) {
-
-                return  false;
+           
             }
         });
 
@@ -239,7 +278,7 @@ public class MainActivity extends AppCompatActivity {
             }
         }
     }
-    public void getDataFromServer() {
+   /* public void getDataFromServer() {
         //showProgressDialog();
         databaseReference.child("users").addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
@@ -293,7 +332,7 @@ public class MainActivity extends AppCompatActivity {
             return true;
         }
     }
-
+*/
     @Override
     public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
@@ -542,10 +581,9 @@ public class MainActivity extends AppCompatActivity {
             allusers.setAdapter(adapter);
             allusers.setEmptyView(findViewById(R.id.user_not_avalible));
             nouser.setVisibility(View.GONE);
+            progressBar.setVisibility(View.GONE);
 
         }
 
     }
 }
-
-
