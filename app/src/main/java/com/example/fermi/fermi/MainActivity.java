@@ -1,6 +1,7 @@
 package com.example.fermi.fermi;
 
 import android.Manifest;
+import android.app.AlertDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -56,8 +57,6 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
-import java.util.Timer;
-import java.util.TimerTask;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
@@ -71,6 +70,7 @@ public class MainActivity extends AppCompatActivity {
     private TabLayout tabLayout;
     private ViewPager viewPager;
     private DrawerLayout mDrawerLayout;
+    AlertDialog alertDialog;
     private ActionBarDrawerToggle mDrawerToggle;
     static public MaterialSearchView materialSearchView;
     FirebaseUser user1 = FirebaseAuth.getInstance().getCurrentUser();
@@ -83,6 +83,8 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        alertDialog = new AlertDialog.Builder(
+                MainActivity.this).create();
         //isStoragePermissionGranted();
         photo = (CircleImageView) findViewById(R.id.profilePhoto);
         allusers = (ListView) findViewById(R.id.listView);
@@ -94,15 +96,10 @@ public class MainActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
         getSupportActionBar().setTitle("Fermi");
 
-        new Timer().scheduleAtFixedRate(new TimerTask() {
-            @Override
-            public void run() {
-                Log.d("getDataFromServer", "getDataFromServer");
-                getDataFromServer();
-            }
-        }, 0, 2000);
+        getDataFromServer();
 
         materialSearchView=(MaterialSearchView)findViewById(R.id.search_view);
+
 
         allusers.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -142,31 +139,26 @@ public class MainActivity extends AppCompatActivity {
 
             @Override
             public boolean onQueryTextSubmit(String query) {
-                return false;
+                databaseReference.child("users").orderByChild("name").equalTo(query).addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(DataSnapshot dataSnapshot) {
+                        SearchTask st = new SearchTask();
+                        st.execute(dataSnapshot);
+
+                    }
+                    @Override
+                    public void onCancelled(DatabaseError databaseError) {
+                        // hideProgressDialog();
+                    }
+                });
+
+                return true;
             }
 
             @Override
             public boolean onQueryTextChange(String newText) {
-                if (newText !=null && !newText.isEmpty()){
-                    ArrayList<User> users1 = new ArrayList<User>();
-                    for (User item:users){
-                        if (item.getEmail().toLowerCase().contains(newText.toLowerCase()) || item.getName().toLowerCase().contains(newText.toLowerCase())) {
-                            users1.add(item);
-                        }
-                    }
-                    adapter = new ListingAdapter(getApplicationContext(), users1);
-                    allusers.setAdapter(adapter);
-                    allusers.setEmptyView(findViewById(R.id.user_not_avalible));
-                    nouser.setVisibility(View.GONE);
-                }
-                else {
-                  /*  adapter = new ListingAdapter(getApplicationContext(), users);
-                    allusers.setAdapter(adapter);*/
-                    allusers.setAdapter(null);
-                    nouser.setVisibility(View.VISIBLE);
-                    usernotavalible.setVisibility(View.GONE);
-                }
-                return  true;
+
+                return  false;
             }
         });
 
@@ -249,7 +241,7 @@ public class MainActivity extends AppCompatActivity {
     }
     public void getDataFromServer() {
         //showProgressDialog();
-        databaseReference.child("users").addValueEventListener(new ValueEventListener() {
+        databaseReference.child("users").addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 users.clear();
@@ -498,4 +490,62 @@ public class MainActivity extends AppCompatActivity {
         }
 
     }
+
+    private class SearchTask extends AsyncTask<DataSnapshot, Integer, Void> {
+        ArrayList<User> users1 = new ArrayList<User>();
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+            alertDialog.setMessage("please wait!!!");
+            alertDialog.show();
+        }
+
+        @Override
+        protected Void doInBackground(DataSnapshot... params) {
+
+
+            if (params[0].exists()) {
+                for (DataSnapshot postSnapShot : params[0].getChildren()) {
+                    User user = postSnapShot.getValue(User.class);
+                    try {
+                        if (!user.getName().equals(FirebaseAuth.getInstance().getCurrentUser().getDisplayName())) {
+                            users1.add(user);
+
+                            Collections.sort(users1, new Comparator<User>() {
+                                @Override
+                                public int compare(User u1, User u2) {
+                                    Log.d("compare", u1.getName() + "" + u2.getName());
+                                    return u1.getName().compareToIgnoreCase(u2.getName());
+                                }
+                            });
+                            Log.d("compare", "123");
+                        } else {
+                        }
+                    } catch (Exception e) {
+                    }
+                }
+            }
+            // hideProgressDialog();
+
+
+
+
+            return null;
+
+        }
+
+        @Override
+        protected void onPostExecute(Void result) {
+            super.onPostExecute(result);
+            alertDialog.dismiss();
+            adapter = new ListingAdapter(getApplicationContext(), users1);
+            allusers.setAdapter(adapter);
+            allusers.setEmptyView(findViewById(R.id.user_not_avalible));
+            nouser.setVisibility(View.GONE);
+
+        }
+
+    }
 }
+
+
